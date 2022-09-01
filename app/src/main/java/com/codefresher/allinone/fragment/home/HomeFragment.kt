@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     private fun fetchData() {
         var post = ArrayList<Trending>()
         val postsAdapter = TrendingAdapter(requireContext(), post)
-        FirebaseFirestore.getInstance().collection("Recipes")
+        FirebaseFirestore.getInstance().collection("Trending")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
@@ -58,10 +58,10 @@ class HomeFragment : Fragment() {
             }
 
         binding.trendRecyclerView.adapter = postsAdapter
-        postsAdapter.onclickItem = {
+        postsAdapter.onclickItem = { trending ->
             val intent =
                 Intent((activity as MainActivity), DetailActivity::class.java)
-            intent.putExtra("url",it)
+            intent.putExtra("url",trending)
             (activity as MainActivity).startActivity(intent)
         }
 

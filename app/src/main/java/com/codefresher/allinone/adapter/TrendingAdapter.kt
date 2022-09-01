@@ -11,13 +11,11 @@ import com.codefresher.allinone.model.Trending
 
 class TrendingAdapter(
     var context: Context,
-    var trendingList: List<Trending>
+    private var trendingList: List<Trending>
 
 ) : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
     inner class TrendingViewHolder(val adapterBinding: TrendingItemBinding) :
-        RecyclerView.ViewHolder(adapterBinding.root) {
-
-    }
+        RecyclerView.ViewHolder(adapterBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
         val binding = TrendingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,21 +24,9 @@ class TrendingAdapter(
     var onclickItem: ((String) -> Unit)? = null
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
-//        val post = postsList[position]
-//        val imageUrl = trendingList[position].url
-//        Glide.with(context).load(imageUrl).into(holder.adapterBinding.imgTrending)
-//        holder.adapterBinding.imgTrending.setOnClickListener {
-//            onItemClick?.invoke(imageUrl)
-//
-//            Navigation.findNavController(view = it).navigate(R.id.action_favoriteFragment_to_detailFavoriteFragment)
-//
-//
-//        }
 
         val post = trendingList[position]
-        val activity = MainActivity()
         holder.adapterBinding.tvTrending.text = post.title
-        //Images with Glide
         Glide.with(context)
             .load(post.imageUrl)
             .into(holder.adapterBinding.imgTrending)
